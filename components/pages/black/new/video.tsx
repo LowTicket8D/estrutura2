@@ -17,10 +17,10 @@ export default function Page() {
 
   // SET CONTENT DATA
   const VSL = VSLBlackNew;
-  const videoId = "68ffb7d22ad758e3709e1303";
+  const videoId = "69ad86e001dc41aee190f3c1";
   const backLink = `https://${host}/promo`;
-  const checkoutLink = "https://teu_link_de_checkout_aqui";
-  const pitchTime = 780;
+  const checkoutLink = "https://go.centerpag.com/PPU38CQ8LDF";
+  const pitchTime = 720;
 
   // VIDEO VERIFY
   useEffect(() => {
