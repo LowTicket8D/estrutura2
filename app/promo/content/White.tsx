@@ -8,7 +8,7 @@ import Progress from "@/components/progress";
 import Button from "@/components/button";
 import { CheckCheck, Loader2 } from "lucide-react";
 
-const CHECKOUT_LINK = "https://go.centerpag.com/PPU38CQ8LDF";
+const CHECKOUT_LINK = "https://go.centerpag.com/PPU38CQ8LDF?coupon=SPECIAL17";
 
 export default function White() {
   const { promoLink } = useLayer();
