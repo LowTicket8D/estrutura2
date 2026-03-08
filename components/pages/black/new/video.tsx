@@ -22,18 +22,50 @@ export default function Page() {
   const checkoutLink = "https://go.centerpag.com/PPU38CQ8LDF";
   const pitchTime = 720;
 
+  // Chaves que o player VTURB/ConverteAI pode usar para salvar o tempo
+  const resumeKeys = [
+    videoId + '-resume',
+    'vid-' + videoId + '-resume',
+    'converteai_' + videoId + '_resume',
+    'vturb_' + videoId + '_resume',
+  ];
+
+  function getStoredVideoTime(): number {
+    for (const key of resumeKeys) {
+      const val = localStorage.getItem(key);
+      if (val != null && val !== '') {
+        const num = Number(val);
+        if (!Number.isNaN(num)) return num;
+      }
+    }
+    // Fallback: qualquer chave do localStorage que contenha o videoId e valor numérico (formato do player)
+    if (typeof localStorage !== 'undefined') {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.includes(videoId)) {
+          const val = localStorage.getItem(key);
+          if (val != null && val !== '') {
+            const num = Number(val);
+            if (!Number.isNaN(num) && num > 0) return num;
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
   // VIDEO VERIFY
   useEffect(() => {
     if (!visible) {
       const intervalId = setInterval(() => {
-        const storedVideoTime = Number(localStorage.getItem(videoId + '-resume'));
+        const storedVideoTime = getStoredVideoTime();
         if (storedVideoTime > pitchTime) {
           setVisible(true);
-        };
+        }
       }, 1000);
       return () => clearInterval(intervalId);
-    };
-  }, [videoId, visible]);
+    }
+  }, [videoId, visible, pitchTime]);
 
   // BACK REDIRECT
   useEffect(() => {
